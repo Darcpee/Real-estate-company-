@@ -1,0 +1,220 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REAL ESTATE COMPANY </title>
+</head>
+<style>
+    body{
+       background-color: aquamarine;
+        color: blue;
+    }
+    .navbar{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 15px 50px;
+        box-shadow: 0 2px 5px rbga(0,0,0,0.1);
+        position: sticky;
+    }
+    .navbar .logo{
+        display: flex;
+        align-items: center;
+    }
+    .navbar .logo img{
+        height: 50px;
+        margin-right: 10px;
+    }
+    .navbar .logo span{
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .navbar ul{
+        list-style: none;
+        display: flex;
+        gap: 30px;
+    }
+    .navbar ul li a{
+        text-decoration: none;
+        color: #333;
+        font-size: 20px;
+        transition: color 0.3s ease;
+        margin-right: 20px;
+        
+    }
+    .navbar ul li a:hover{
+        color: #3448c5;
+    }
+    .botton .login{
+        text-decoration: none;
+        color: #333;
+        font-size: 20px;
+        margin-right: 20px;
+        border: 1px solid #3448c5;
+        padding: 5px 15px;
+        border-radius: 5px;
+
+    }
+    .botton .signup{
+        text-decoration: none;
+        color: #fff;
+        font-size: 20px;
+        background-color: #3448c5;
+        padding: 8px 15px;
+        border-radius: 5px;
+    }
+    .botton .login:hover{
+        background-color: #3448c5;
+        color: #fff;
+    }
+    .botton .signup:hover{
+        background-color: antiquewhite;
+        color: #fff;
+    }
+    .form-container{
+       width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+    }
+    .form-container h2{
+      text-align: center;
+      margin-bottom: 20px;
+      color: #3448c5;
+    }
+     .form-container label {
+      display: block;
+      margin: 10px 0 5px;
+      font-size: 10px;
+    }
+    .form-container input{
+      width: 98%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    .form-container button{
+      width: 100%;
+      padding: 10px;
+      background-color: #3448c5;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+     .form-container button:hover {
+      background-color: #2636a0;
+    }
+    input,select{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid lightgray;
+        border-radius: 8px;
+    }
+    
+
+</style>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="https://res.cloudinary.com/demo/image/upload/cloudinary_icon_blue.png" alt="Cloudinary Logo" alt="">
+            <span>cloudinary</span>
+
+        </div>
+        <ul>
+            <li>
+                <a href="">Products</a>
+                <a href="">Developer</a>
+                <a href="">Solutions</a>
+                <a href="">Pricing</a>
+                <a href="">Resources</a>
+                <a href="">Help</a>
+                <a href="">About</a>
+            </li>
+        </ul>
+        <div class="botton">
+            <a href="/login" class="login">login</a>
+            <a href="/signup" class="signup">signup</a>
+
+        </div>
+    </header>
+
+    <div class="form-container" id="loginForm">
+        <h2>Login</h2>
+        <form action="">
+            <label for="">phone</label>
+            <input type="Phone" placeholder="enter your Phone">
+            <label for="">Password</label>
+            <input type="password" placeholder="please enter password">
+            <button type="submit">Login</button>
+        </form>
+
+    </div>
+
+    <div class="form-container" id="signupForm">
+        <h2>Signup</h2>
+        <form method="post" action="/signup">
+            <label for="">  Name</label>
+            <input type="text" placeholder="enter name">
+            <label for="">Password</label>
+            <input type="password" placeholder="enter your password">
+            <label for="">Phone</label>
+            <input type="phone" placeholder="enter your number">
+            <label for="">Role</label>
+             <select name="" id="">
+                <option value="">Admin</option>
+                <option value="">Seller</option>
+                <option value="">Buyer</option>
+                <option value="">Agent</option>
+             </select>
+            <label for="">SecretKey</label>
+            <input type="SecrfetKey" placeholder="enter your Secretkey">
+             <button type="submit">Signup</button>
+        </form>
+    </div>
+
+    <script>
+         // Handle Signup
+  document.getElementById("signupFormElement").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    let name = document.getElementById("signupName").value;
+    let phone = document.getElementById("signupPhone").value;
+    let password = document.getElementById("signupPassword").value;
+    let Role = document.getElementById("signupRole").value;
+
+    let res = await fetch("http://localhost:3500/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phone, password })
+    });
+
+    let data = await res.json();
+    alert(data.message || data.error);
+  });
+
+  // Handle Login
+  document.getElementById("loginFormElement").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    let email = document.getElementById("loginEmail").value;
+    let password = document.getElementById("loginPassword").value;
+
+    let res = await fetch("http://localhost:3500/login", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    let data = await res.json();
+    alert(data.message || data.error);
+  });
+    </script>
+</body>
+</html> -->
